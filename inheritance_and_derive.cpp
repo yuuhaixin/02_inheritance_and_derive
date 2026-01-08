@@ -68,14 +68,16 @@ void Teacher::teach()
 
 int main()
 {
-    People ZhangSan;
-    People *LiSi = new People("LiSi", 15);
-    LiSi->display();
-
+    People ZhangSan("Zhangsan", 25);
     Teacher LiMing = Teacher("LiMing", 30, "School");
+    
+    cout << "赋值前：" << endl;
+    ZhangSan.display();
     LiMing.display();
-    LiMing.teach();
 
-    delete LiSi;
+    ZhangSan = LiMing;
+    cout << "赋值后： " << endl;
+    ZhangSan.display();
+
     return 0;
 }
