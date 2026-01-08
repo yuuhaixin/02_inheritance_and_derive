@@ -18,6 +18,7 @@ public:
     ~People();
 
     virtual void display() const;
+    virtual void show_salary() = 0;
 };
 
 People::People() : name("none"), age(0)
@@ -50,6 +51,7 @@ public:
     ~Teacher();
     void teach();
     void display() const override;
+    void show_salary() override;
 };
 
 Teacher::Teacher(string name, int age, string w_p) : People(name, age), working_place(w_p)
@@ -72,15 +74,17 @@ void Teacher::display() const
     cout << "name: " << name << ", age: " << age << ", working_place: " << working_place << endl;
 }
 
+void Teacher::show_salary(){
+    cout << "salary: " << "12w per year." << endl;
+}
+
 int main()
 {
-    People* ZhangSan = new People("Zhangsan", 25);
     People* LiMing = new Teacher("LiMing", 30, "School");
     
-    ZhangSan->display();
     LiMing->display();
+    LiMing->show_salary();
 
-    delete ZhangSan;
     delete LiMing;
 
     return 0;
