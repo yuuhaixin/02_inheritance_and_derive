@@ -17,22 +17,22 @@ public:
     People(string name, int age);
     ~People();
 
-    void display() const;
+    virtual void display() const;
 };
 
 People::People() : name("none"), age(0)
 {
-    cout << "执行People类默认构造函数..." << name << endl;
+    // cout << "执行People类默认构造函数..." << name << endl;
 }
 
 People::People(string name, int age) : name(name), age(age)
 {
-    cout << "执行People类含参构造函数..." << name << endl;
+    // cout << "执行People类含参构造函数..." << name << endl;
 }
 
 People::~People()
 {
-    cout << "执行People类析构函数..." << name << endl;
+    // cout << "执行People类析构函数..." << name << endl;
 }
 
 void People::display() const
@@ -49,16 +49,17 @@ public:
     Teacher(string name, int age, string w_p);
     ~Teacher();
     void teach();
+    void display() const override;
 };
 
 Teacher::Teacher(string name, int age, string w_p) : People(name, age), working_place(w_p)
 {
-    cout << "执行Teacher类含参构造函数..." << name << endl;
+    // cout << "执行Teacher类含参构造函数..." << name << endl;
 }
 
 Teacher::~Teacher()
 {
-    cout << "执行Teacher类析构函数..." << name << endl;
+    // cout << "执行Teacher类析构函数..." << name << endl;
 }
 
 void Teacher::teach()
@@ -66,18 +67,21 @@ void Teacher::teach()
     cout << name << " works in " << working_place << endl;
 }
 
+void Teacher::display() const
+{
+    cout << "name: " << name << ", age: " << age << ", working_place: " << working_place << endl;
+}
+
 int main()
 {
-    People ZhangSan("Zhangsan", 25);
-    Teacher LiMing = Teacher("LiMing", 30, "School");
+    People* ZhangSan = new People("Zhangsan", 25);
+    People* LiMing = new Teacher("LiMing", 30, "School");
     
-    cout << "赋值前：" << endl;
-    ZhangSan.display();
-    LiMing.display();
+    ZhangSan->display();
+    LiMing->display();
 
-    ZhangSan = LiMing;
-    cout << "赋值后： " << endl;
-    ZhangSan.display();
+    delete ZhangSan;
+    delete LiMing;
 
     return 0;
 }
